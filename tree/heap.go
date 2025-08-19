@@ -1,11 +1,11 @@
 package tree
 
 type Leaf struct {
-	Char  string
+	Char  rune
 	Freq  int
 	Left  *Leaf
 	Right *Leaf
-	Code  int
+	Code  string
 }
 
 type BST struct {

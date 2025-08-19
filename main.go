@@ -6,10 +6,10 @@ import (
 )
 
 func main() {
-	bst := tree.BST{}
-
 	frequencies := filehandling.RuneFreq(filehandling.OpenFile("./test.txt"))
 	huff := tree.BuildTree(frequencies)
 
-	bst.BuildCode(huff)
+	tree.BuildCode(huff, "")
+
+	//tree.PrintTree(huff)
 }

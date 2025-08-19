@@ -2,11 +2,12 @@ package tree
 
 import "container/heap"
 
-func BuildTree(freqMap map[string]int) *Leaf {
+func BuildTree(freqMap map[rune]int) *Leaf {
 	pg := make(PriorityQueue, 0)
 	heap.Init(&pg)
 
 	for char, freq := range freqMap {
+		println(char, " ", string(char))
 		heap.Push(&pg, &Leaf{Char: char, Freq: freq})
 	}
 

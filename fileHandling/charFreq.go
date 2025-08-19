@@ -1,10 +1,10 @@
 package filehandling
 
-func RuneFreq(fileContent string) map[string]int {
-	frequency := make(map[string]int)
+func RuneFreq(fileContent string) map[rune]int {
+	frequency := make(map[rune]int)
 
 	for _, rune := range fileContent {
-		frequency[string(rune)] = frequency[string(rune)] + 1
+		frequency[rune] = frequency[rune] + 1
 	}
 
 	return frequency
