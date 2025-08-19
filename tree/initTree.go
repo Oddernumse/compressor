@@ -7,7 +7,7 @@ func BuildTree(freqMap map[string]int) *Leaf {
 	heap.Init(&pg)
 
 	for char, freq := range freqMap {
-		heap.Push(&pg, &Leaf{char: char, freq: freq})
+		heap.Push(&pg, &Leaf{Char: char, Freq: freq})
 	}
 
 	for pg.Len() > 1 {
@@ -15,9 +15,9 @@ func BuildTree(freqMap map[string]int) *Leaf {
 		right := heap.Pop(&pg).(*Leaf)
 
 		combined := &Leaf{
-			freq:  left.freq + right.freq,
-			left:  left,
-			right: right,
+			Freq:  left.Freq + right.Freq,
+			Left:  left,
+			Right: right,
 		}
 
 		heap.Push(&pg, combined)
