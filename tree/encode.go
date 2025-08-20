@@ -8,11 +8,10 @@ func BuildCode(nodes *Leaf, currentCode string) {
 	if nodes.Char != 0 {
 		nodes.Code = currentCode
 
-		BuildCode(nodes.Left, nodes.Code+"0")
-		BuildCode(nodes.Right, nodes.Code+"1")
 	}
 
-	println(nodes.Char, " ", nodes.Code)
+	BuildCode(nodes.Left, currentCode+"0")
+	BuildCode(nodes.Right, currentCode+"1")
 }
 
 func PrintTree(nodes *Leaf) {

@@ -7,7 +7,7 @@ func BuildTree(freqMap map[rune]int) *Leaf {
 	heap.Init(&pg)
 
 	for char, freq := range freqMap {
-		println(char, " ", string(char))
+		//println(char, " ", string(char))
 		heap.Push(&pg, &Leaf{Char: char, Freq: freq})
 	}
 

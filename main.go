@@ -11,5 +11,5 @@ func main() {
 
 	tree.BuildCode(huff, "")
 
-	//tree.PrintTree(huff)
+	tree.PrintTree(huff)
 }
