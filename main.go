@@ -1,15 +1,32 @@
 package main
 
 import (
-	filehandling "compression/fileHandling"
+	"compression/compress"
+	"compression/fileHandling"
 	"compression/tree"
 )
 
 func main() {
-	frequencies := filehandling.RuneFreq(filehandling.OpenFile("./test.txt"))
+	uncompressed := fileHandling.OpenFile("./test.txt")
+
+	frequencies := fileHandling.RuneFreq(uncompressed)
 	huff := tree.BuildTree(frequencies)
 
-	tree.BuildCode(huff, "")
+	codeMap := make(map[string]string)
 
-	tree.PrintTree(huff)
+	tree.BuildCode(huff, "", codeMap)
+
+	compressed := compress.Compress(codeMap, uncompressed)
+	compress.Decompress(compressed, huff)
+
+	fileHandling.WriteFile(compressed)
+
+	//test := byte("11111111")
+
+	//fmt.Printf("%08b", test)
+
+	//os.WriteFile("./compressed.txt", test, 0644)
+
+	//testing, _ := os.ReadFile("compressed.bin")
+	//println(string([]byte(testing)))
 }

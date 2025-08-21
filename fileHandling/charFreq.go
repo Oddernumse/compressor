@@ -1,4 +1,4 @@
-package filehandling
+package fileHandling
 
 func RuneFreq(fileContent string) map[rune]int {
 	frequency := make(map[rune]int)
