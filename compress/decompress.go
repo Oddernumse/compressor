@@ -6,6 +6,7 @@ import (
 	"strings"
 )
 
+// I don't like bitwise operators
 func ByteToBinaryString(byteNumber byte) string {
 	v := byte(byteNumber)
 	binaryString := ""
@@ -21,7 +22,7 @@ func ByteToBinaryString(byteNumber byte) string {
 	return binaryString
 }
 
-func Decompress(compressed []byte, root *tree.Leaf) string {
+func Decompress(compressed []byte, root *tree.Leaf) {
 	node := root
 	var decompressed strings.Builder
 
@@ -43,7 +44,5 @@ func Decompress(compressed []byte, root *tree.Leaf) string {
 		}
 	}
 
-	os.WriteFile("./uncompressed.txt", []byte(decompressed.String()), 0644)
-
-	return decompressed.String()
+	os.WriteFile(os.Args[2], []byte(decompressed.String()), 0644)
 }

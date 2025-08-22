@@ -8,19 +8,17 @@ import (
 )
 
 func main() {
-	uncompressed := fileHandling.OpenFile("./test.txt")
-
+	uncompressed := fileHandling.OpenFile(os.Args[1])
 	frequencies := fileHandling.RuneFreq(uncompressed)
 	huff := tree.BuildTree(frequencies)
 
 	codeMap := make(map[string]string)
-
 	tree.BuildCode(huff, "", codeMap)
-
 	compressed := compress.Compress(codeMap, uncompressed)
 
 	fileHandling.WriteBin(compressed)
-
 	fh, _ := os.ReadFile("./compressed.bin")
-	println(compress.Decompress(fh, huff))
+	// The compressed file technically IS missing a header section
+	// for someone else to be able to decompress this
+	compress.Decompress(fh, huff)
 }
