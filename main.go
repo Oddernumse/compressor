@@ -1,9 +1,15 @@
 package main
 
 import (
+	"bufio"
 	"compression/compress"
 	"compression/fileHandling"
 	"compression/tree"
+	"encoding/binary"
+	"fmt"
+	"io"
+	"log"
+	"os"
 )
 
 func main() {
@@ -16,17 +22,31 @@ func main() {
 
 	tree.BuildCode(huff, "", codeMap)
 
-	compressed := compress.Compress(codeMap, uncompressed)
-	compress.Decompress(compressed, huff)
+	compress.Compress(codeMap, uncompressed)
 
-	fileHandling.WriteFile(compressed)
+	//fileHandling.WriteFile(compressed)
 
-	//test := byte("11111111")
+	f, err := os.Open("./compressed.bin")
 
-	//fmt.Printf("%08b", test)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	//os.WriteFile("./compressed.txt", test, 0644)
+	defer f.Close()
 
-	//testing, _ := os.ReadFile("compressed.bin")
-	//println(string([]byte(testing)))
+	reader := bufio.NewReader(f)
+	buf := make([]byte, 256)
+
+	for {
+		_, err := reader.Read(buf)
+
+		if err != nil {
+			if err != io.EOF {
+				fmt.Println(err)
+			}
+			break
+		}
+
+		println(binary.ReadVarint(buf))
+	}
 }

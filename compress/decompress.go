@@ -5,12 +5,17 @@ import (
 	"strings"
 )
 
-func Decompress(compressed string, root *tree.Leaf) string {
+func ByteToBinaryString(byteNumber byte) {
+
+}
+
+func Decompress(compressed []byte, root *tree.Leaf) string {
 	node := root
 	var decompressed strings.Builder
 
 	for _, bit := range compressed {
-		if string(bit) == "0" {
+
+		if bit == 0 {
 			node = node.Left
 		} else {
 			node = node.Right
